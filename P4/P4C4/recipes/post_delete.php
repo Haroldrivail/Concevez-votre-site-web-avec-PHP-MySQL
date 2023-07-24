@@ -5,11 +5,10 @@ include_once('./../config/mysql.php');
 include_once('./../config/user.php');
 include_once('./../variables.php');
 
-if (!isset($_POST['id']))
-{
-	echo 'Il faut un identifiant valide pour supprimer une recette.';
+if (!isset($_POST['id'])) {
+    echo 'Il faut un identifiant valide pour supprimer une recette.';
     return;
-}	
+}
 
 $id = $_POST['id'];
 
@@ -18,5 +17,4 @@ $deleteRecipeStatement->execute([
     'id' => $id,
 ]);
 
-header('Location: '.$rootUrl.'home.php');
-?>
+header('Location: ' . $rootUrl . 'home.php');

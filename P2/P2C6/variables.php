@@ -1,5 +1,7 @@
 <?php
 
+// Variables
+
 $users = [
     [
         'full_name' => 'Mickaël Andrieu',

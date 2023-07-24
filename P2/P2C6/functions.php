@@ -1,5 +1,7 @@
 <?php
 
+// Functions
+
 function display_recipe(array $recipe) : string
 {
     $recipe_content = '';

@@ -2,9 +2,11 @@
 
 $postData = $_POST;
 
-if (!isset($postData['email']) || !isset($postData['message']))
-{
-	echo('Il faut un email et un message pour soumettre le formulaire.');
+if (
+    (!isset($postData['email']) || !filter_var($postData['email'], FILTER_VALIDATE_EMAIL))
+    || (!isset($postData['message']) || empty($postData['message']))
+) {
+    echo ('Il faut un email et un message valides pour soumettre le formulaire.');
     return;
 }	
 
