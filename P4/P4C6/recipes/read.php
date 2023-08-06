@@ -6,11 +6,10 @@ include_once('./../config/user.php');
 include_once('./../variables.php');
 
 $getData = $_GET;
-if (!isset($getData['id']) && is_numeric($getData['id']))
-{
-	echo('La recette n\'existe pas');
+if (!isset($getData['id']) && is_numeric($getData['id'])) {
+    echo ('La recette n\'existe pas');
     return;
-}	
+}
 
 $recipeId = $getData['id'];
 
@@ -37,7 +36,7 @@ $recipe = [
     'rating' => $averageRating['rating'],
 ];
 
-foreach($recipeWithComments as $comment) {
+foreach ($recipeWithComments as $comment) {
     if (!is_null($comment['comment_id'])) {
         $recipe['comments'][] = [
             'comment_id' => $comment['comment_id'],
@@ -51,49 +50,49 @@ foreach($recipeWithComments as $comment) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Recettes - <?php echo($recipe['title']); ?></title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-    >
+    <title>Site de Recettes - <?php echo ($recipe['title']); ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once($rootPath.'/header.php'); ?>
-        <h1><?php echo($recipe['title']); ?></h1>
+        <?php include_once($rootPath . '/header.php'); ?>
+        <h1><?php echo ($recipe['title']); ?></h1>
         <div class="row">
             <article class="col">
-                <?php echo($recipe['recipe']); ?>
+                <?php echo ($recipe['recipe']); ?>
             </article>
             <aside class="col">
-                <p><i>Contribuée par <?php echo($recipe['author']); ?></i></p>
-                <p><b>Evaluée par la communauté à <?php echo($recipe['rating']); ?> / 5</b></p>
+                <p><i>Contribuée par <?php echo ($recipe['author']); ?></i></p>
+                <p><b>Evaluée par la communauté à <?php echo ($recipe['rating']); ?> / 5</b></p>
             </aside>
         </div>
 
-        <?php if(count($recipe['comments']) > 0): ?>
-        <hr />
-        <h2>Commentaires</h2>
-        <div class="row">
-            <?php foreach($recipe['comments'] as $comment): ?>
-                <div class="comment">
-                    <p><?php echo($comment['created_at']); ?></p>
-                    <p><?php echo($comment['comment']); ?></p>
-                    <i>(<?php echo(display_user($comment['user_id'], $users)); ?>)</i>
-                </div>
-            <?php endforeach; ?>
-        </div>
+        <?php if (count($recipe['comments']) > 0) : ?>
+            <hr />
+            <h2>Commentaires</h2>
+            <div class="row">
+                <?php foreach ($recipe['comments'] as $comment) : ?>
+                    <div class="comment">
+                        <p><?php echo ($comment['created_at']); ?></p>
+                        <p><?php echo ($comment['comment']); ?></p>
+                        <i>(<?php echo (display_user($comment['user_id'], $users)); ?>)</i>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         <?php endif; ?>
         <hr />
         <?php if (isset($loggedUser)) : ?>
-            <?php include_once($rootPath.'/comments/create.php'); ?>
+            <?php include_once($rootPath . '/comments/create.php'); ?>
         <?php endif; ?>
     </div>
-    <?php include_once($rootPath.'/footer.php'); ?>
+    <?php include_once($rootPath . '/footer.php'); ?>
 </body>
+
 </html>
